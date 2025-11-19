@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 from scf.config import Config
 from scf.grid import Grid1D
 from scf.potential import ExternalPotentialParams
@@ -14,7 +15,7 @@ def ask_int(msg):
 def main():
     cfg = Config()
 
-    # Entrada interactiva como el original
+    # Entrada interactiva
     k = ask_float("Ingrese el valor de k: ")
     m = ask_float("Ingrese el valor de m: ")
     rho0 = ask_float("Ingrese el valor de rho_0: ")
@@ -69,14 +70,21 @@ def main():
         L=L
     )
 
-    # Ejecutar SCF
+    # Ejecutar SCF y medir tiempo
     runner = SCFRunner(cfg, grid, ext_params, m=m, k=k, rho0=rho0)
-    mu, E, total_time, rho = runner.run(rho_init)
+    start_time = time.time()
+    result = runner.run(rho_init)
+    end_time = time.time()
+    total_time = end_time - start_time
+
+    mu = result["mu"]
+    E = result["E"]
+    rho = result["rho"]
 
     # Salidas en consola
     print(f"\nEnergía química (mu): {mu} J")
     print(f"Energía del estado fundamental (E): {E} J")
-    print(f"Tiempo total de cálculo: {total_time} segundos.")
+    print(f"Tiempo total de cálculo: {total_time:.2f} segundos.")
 
     # Archivos y gráficos
     IOUtils.save_density(grid.x, rho, "rho_vs_x.dat")
