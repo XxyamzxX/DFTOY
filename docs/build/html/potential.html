@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>potential &mdash; documentación de DFToy - 1.2</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=dab6a19e"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=f85f4cfb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="scf_loop" href="scf_loop.html" />
+    <link rel="prev" title="io_utils" href="io_utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DFToy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Módulos</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="config.html">scf.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grid.html">scf.grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hamiltonian.html">scf.hamiltonian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io_utils.html">io_utils</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">potential</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#potentials">potentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ejemplo">Ejemplo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#scf.potential.ExternalPotentialParams"><code class="docutils literal notranslate"><span class="pre">ExternalPotentialParams</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scf.potential.ExternalPotentialParams.potential_type"><code class="docutils literal notranslate"><span class="pre">ExternalPotentialParams.potential_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.potential.ExternalPotentialParams.alpha"><code class="docutils literal notranslate"><span class="pre">ExternalPotentialParams.alpha</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.potential.ExternalPotentialParams.beta"><code class="docutils literal notranslate"><span class="pre">ExternalPotentialParams.beta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.potential.ExternalPotentialParams.a_dw"><code class="docutils literal notranslate"><span class="pre">ExternalPotentialParams.a_dw</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.potential.ExternalPotentialParams.omega_ext"><code class="docutils literal notranslate"><span class="pre">ExternalPotentialParams.omega_ext</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.potential.ExternalPotentialParams.V0"><code class="docutils literal notranslate"><span class="pre">ExternalPotentialParams.V0</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.potential.ExternalPotentialParams.L"><code class="docutils literal notranslate"><span class="pre">ExternalPotentialParams.L</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#scf.potential.Potentials"><code class="docutils literal notranslate"><span class="pre">Potentials</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scf.potential.Potentials.v_ext"><code class="docutils literal notranslate"><span class="pre">Potentials.v_ext()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.potential.Potentials.compute_omegas"><code class="docutils literal notranslate"><span class="pre">Potentials.compute_omegas()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.potential.Potentials.v_eff"><code class="docutils literal notranslate"><span class="pre">Potentials.v_eff()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scf_loop.html">scf_loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solver.html">solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DFToy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">potential</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/potential.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-scf.potential">
+<span id="potential"></span><h1>potential<a class="headerlink" href="#module-scf.potential" title="Link to this heading"></a></h1>
+<section id="potentials">
+<h2>potentials<a class="headerlink" href="#potentials" title="Link to this heading"></a></h2>
+<p>Define los potenciales externos y efectivos utilizados en DFToy, junto con
+funciones auxiliares para cálculos relacionados, como la determinación de
+frecuencias características omega0 y omega.</p>
+<p>Contiene:
+- Clase <cite>ExternalPotentialParams</cite> para parametrizar distintos tipos de potenciales.
+- Clase <cite>Potentials</cite> con métodos estáticos para calcular potencial externo, efectivo y frecuencias.</p>
+<section id="ejemplo">
+<h3>Ejemplo<a class="headerlink" href="#ejemplo" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">potentials</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExternalPotentialParams</span><span class="p">,</span> <span class="n">Potentials</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">ExternalPotentialParams</span><span class="p">(</span><span class="n">potential_type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">Potentials</span><span class="o">.</span><span class="n">v_ext</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">omega0</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">Potentials</span><span class="o">.</span><span class="n">compute_omegas</span><span class="p">(</span><span class="n">hbar</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">rho0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v_eff_array</span> <span class="o">=</span> <span class="n">Potentials</span><span class="o">.</span><span class="n">v_eff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">hbar</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">omega0</span><span class="o">=</span><span class="n">omega0</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="scf.potential.ExternalPotentialParams">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.potential.</span></span><span class="sig-name descname"><span class="pre">ExternalPotentialParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">potential_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_dw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_ext</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/potential.html#ExternalPotentialParams"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.potential.ExternalPotentialParams" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parámetros que definen un potencial externo.</p>
+<section id="atributos">
+<h2>Atributos<a class="headerlink" href="#atributos" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>potential_type<span class="classifier">int</span></dt><dd><p>Tipo de potencial:
+1 → V(x) = α|x|
+2 → V(x) = β(x² - a²)²
+3 → V(x) = 0.5 m ω² x²
+4 → Pozo cuadrado</p>
+</dd>
+<dt>alpha<span class="classifier">float, opcional</span></dt><dd><p>Parámetro α usado en el potencial lineal. Por defecto 1.0</p>
+</dd>
+<dt>beta<span class="classifier">float, opcional</span></dt><dd><p>Parámetro β usado en el potencial de doble pozo. Por defecto 1.0</p>
+</dd>
+<dt>a_dw<span class="classifier">float, opcional</span></dt><dd><p>Parámetro a del doble pozo. Por defecto 1.0</p>
+</dd>
+<dt>omega_ext<span class="classifier">float, opcional</span></dt><dd><p>Frecuencia para el potencial armónico. Por defecto 1.0</p>
+</dd>
+<dt>V0<span class="classifier">float, opcional</span></dt><dd><p>Profundidad del pozo cuadrado. Por defecto 1.0</p>
+</dd>
+<dt>L<span class="classifier">float, opcional</span></dt><dd><p>Ancho del pozo cuadrado. Por defecto 2.0</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.potential.ExternalPotentialParams.potential_type">
+<span class="sig-name descname"><span class="pre">potential_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#scf.potential.ExternalPotentialParams.potential_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.potential.ExternalPotentialParams.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.potential.ExternalPotentialParams.alpha" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.potential.ExternalPotentialParams.beta">
+<span class="sig-name descname"><span class="pre">beta</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.potential.ExternalPotentialParams.beta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.potential.ExternalPotentialParams.a_dw">
+<span class="sig-name descname"><span class="pre">a_dw</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.potential.ExternalPotentialParams.a_dw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.potential.ExternalPotentialParams.omega_ext">
+<span class="sig-name descname"><span class="pre">omega_ext</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.potential.ExternalPotentialParams.omega_ext" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.potential.ExternalPotentialParams.V0">
+<span class="sig-name descname"><span class="pre">V0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.potential.ExternalPotentialParams.V0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.potential.ExternalPotentialParams.L">
+<span class="sig-name descname"><span class="pre">L</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2.0</span></em><a class="headerlink" href="#scf.potential.ExternalPotentialParams.L" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>potential_type</strong> (<em>int</em>)</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>)</p></li>
+<li><p><strong>beta</strong> (<em>float</em>)</p></li>
+<li><p><strong>a_dw</strong> (<em>float</em>)</p></li>
+<li><p><strong>omega_ext</strong> (<em>float</em>)</p></li>
+<li><p><strong>V0</strong> (<em>float</em>)</p></li>
+<li><p><strong>L</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="scf.potential.Potentials">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.potential.</span></span><span class="sig-name descname"><span class="pre">Potentials</span></span><a class="reference internal" href="_modules/scf/potential.html#Potentials"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.potential.Potentials" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Métodos estáticos para calcular potenciales y frecuencias características.</p>
+<p>Contiene funciones para:
+- v_ext: calcular el potencial externo según el tipo de potencial.
+- compute_omegas: determinar las frecuencias omega0 y omega.
+- v_eff: calcular el potencial efectivo a partir del externo y las frecuencias.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="scf.potential.Potentials.v_ext">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_ext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/potential.html#Potentials.v_ext"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.potential.Potentials.v_ext" title="Link to this definition"></a></dt>
+<dd><p>Calcula el potencial externo V(x) según el tipo especificado.</p>
+<section id="parametros">
+<h2>Parámetros<a class="headerlink" href="#parametros" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>x<span class="classifier">np.ndarray</span></dt><dd><p>Vector de posiciones espaciales.</p>
+</dd>
+<dt>p<span class="classifier">ExternalPotentialParams</span></dt><dd><p>Parámetros del potencial.</p>
+</dd>
+<dt>m<span class="classifier">float</span></dt><dd><p>Masa de la partícula.</p>
+</dd>
+</dl>
+</section>
+<section id="devuelve">
+<h2>Devuelve<a class="headerlink" href="#devuelve" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>np.ndarray</dt><dd><p>Vector con el valor del potencial externo en cada posición x.</p>
+</dd>
+</dl>
+</section>
+<section id="id1">
+<h2>Ejemplo<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">ExternalPotentialParams</span><span class="p">(</span><span class="n">potential_type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Potentials</span><span class="o">.</span><span class="n">v_ext</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">array([2., 0., 2.])</span>
+</pre></div>
+</div>
+</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>p</strong> (<a class="reference internal" href="#scf.potential.ExternalPotentialParams" title="scf.potential.ExternalPotentialParams"><em>ExternalPotentialParams</em></a>)</p></li>
+<li><p><strong>m</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scf.potential.Potentials.compute_omegas">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute_omegas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hbar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/potential.html#Potentials.compute_omegas"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.potential.Potentials.compute_omegas" title="Link to this definition"></a></dt>
+<dd><p>Calcula las frecuencias características omega0 y omega usadas en el potencial efectivo.</p>
+<section id="id2">
+<h2>Parámetros<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>hbar<span class="classifier">float</span></dt><dd><p>Constante reducida de Planck.</p>
+</dd>
+<dt>k<span class="classifier">float</span></dt><dd><p>Constante de fuerza.</p>
+</dd>
+<dt>m<span class="classifier">float</span></dt><dd><p>Masa de la partícula.</p>
+</dd>
+<dt>rho0<span class="classifier">float</span></dt><dd><p>Valor característico de la densidad inicial.</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h2>Devuelve<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>tuple</dt><dd><p>omega0, omega : float
+Frecuencias características calculadas.</p>
+</dd>
+</dl>
+</section>
+<section id="notas">
+<h2>Notas<a class="headerlink" href="#notas" title="Link to this heading"></a></h2>
+<p>La fórmula proviene de la aproximación para el potencial efectivo 1D.</p>
+</section>
+<section id="id4">
+<h2>Ejemplo<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">omega0</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">Potentials</span><span class="o">.</span><span class="n">compute_omegas</span><span class="p">(</span><span class="n">hbar</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">rho0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hbar</strong> (<em>float</em>)</p></li>
+<li><p><strong>k</strong> (<em>float</em>)</p></li>
+<li><p><strong>m</strong> (<em>float</em>)</p></li>
+<li><p><strong>rho0</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scf.potential.Potentials.v_eff">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_eff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_ext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hbar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/potential.html#Potentials.v_eff"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.potential.Potentials.v_eff" title="Link to this definition"></a></dt>
+<dd><p>Calcula el potencial efectivo V_eff(x) a partir del potencial externo y las frecuencias.</p>
+<section id="id5">
+<h2>Parámetros<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>x<span class="classifier">np.ndarray</span></dt><dd><p>Vector de posiciones espaciales.</p>
+</dd>
+<dt>v_ext<span class="classifier">np.ndarray</span></dt><dd><p>Vector con el potencial externo.</p>
+</dd>
+<dt>hbar<span class="classifier">float</span></dt><dd><p>Constante reducida de Planck.</p>
+</dd>
+<dt>m<span class="classifier">float</span></dt><dd><p>Masa de la partícula.</p>
+</dd>
+<dt>omega0<span class="classifier">float</span></dt><dd><p>Frecuencia característica omega0.</p>
+</dd>
+<dt>omega<span class="classifier">float</span></dt><dd><p>Frecuencia característica omega.</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h2>Devuelve<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>np.ndarray</dt><dd><p>Vector con el valor del potencial efectivo en cada posición x.</p>
+</dd>
+</dl>
+</section>
+<section id="id7">
+<h2>Ejemplo<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v_ext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Potentials</span><span class="o">.</span><span class="n">v_eff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v_ext</span><span class="p">,</span> <span class="n">hbar</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">omega0</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">array([...])</span>
+</pre></div>
+</div>
+</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>v_ext</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>hbar</strong> (<em>float</em>)</p></li>
+<li><p><strong>m</strong> (<em>float</em>)</p></li>
+<li><p><strong>omega0</strong> (<em>float</em>)</p></li>
+<li><p><strong>omega</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="io_utils.html" class="btn btn-neutral float-left" title="io_utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="scf_loop.html" class="btn btn-neutral float-right" title="scf_loop" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2025, Julian Cogua, Juan Esteban Neira.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
