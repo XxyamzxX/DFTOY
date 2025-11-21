@@ -1,0 +1,216 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scf.io_utils &mdash; documentación de DFToy - 1.2</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=dab6a19e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=f85f4cfb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            DFToy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Módulos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">scf.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../grid.html">scf.grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hamiltonian.html">scf.hamiltonian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io_utils.html">io_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../potential.html">potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scf_loop.html">scf_loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../solver.html">solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DFToy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">scf.io_utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para scf.io_utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">io_utils</span>
+<span class="sd">========</span>
+
+<span class="sd">Proporciona utilidades de entrada/salida para DFToy, incluyendo funciones</span>
+<span class="sd">para guardar densidades electrónicas y generar scripts de gnuplot para</span>
+<span class="sd">visualizar densidades y convergencia SCF.</span>
+
+<span class="sd">Ejemplo</span>
+<span class="sd">-------</span>
+<span class="sd">&gt;&gt;&gt; from scf.io_utils import IOUtils</span>
+<span class="sd">&gt;&gt;&gt; IOUtils.save_density([0,1,2], [0.1,0.2,0.3], filename=&#39;rho.dat&#39;)</span>
+<span class="sd">&gt;&gt;&gt; IOUtils.write_gnuplot_density_script(E=0.5, potential_type=3)</span>
+<span class="sd">&gt;&gt;&gt; IOUtils.write_gnuplot_convergence_script()</span>
+<span class="sd">&gt;&gt;&gt; IOUtils.run_gnuplot(&#39;plot.gp&#39;, &#39;convergencia.gp&#39;)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+
+
+<div class="viewcode-block" id="IOUtils">
+<a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils">[documentos]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IOUtils</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase estática con métodos de entrada/salida de datos.</span>
+
+<span class="sd">    Contiene funciones para guardar densidades electrónicas en archivos de</span>
+<span class="sd">    texto y generar scripts de gnuplot para graficar densidad y</span>
+<span class="sd">    convergencia SCF.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="IOUtils.save_density">
+<a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils.save_density">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_density</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;rho_vs_x.dat&quot;</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">rhoi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">xi</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">rhoi</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="IOUtils.write_gnuplot_density_script">
+<a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils.write_gnuplot_density_script">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_gnuplot_density_script</span><span class="p">(</span><span class="n">E</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">potential_type</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_gp</span><span class="o">=</span><span class="s2">&quot;plot.gp&quot;</span><span class="p">):</span>
+        <span class="n">title_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Densidad para V(x)=α|x|&quot;</span><span class="p">,</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;Densidad para V(x)=β(x^2-a^2)^2&quot;</span><span class="p">,</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;Densidad para V(x)=0.5 m ω^2 x^2&quot;</span><span class="p">,</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;Densidad para V(x) pozo cuadrado&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_gp</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">g</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set term epscairo color</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set output &#39;rho_vs_x.eps&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;set title &#39;</span><span class="si">{</span><span class="n">title_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">potential_type</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Densidad electrónica&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">, E=</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set xlabel &#39;x&#39;</span><span class="se">\n</span><span class="s2">set ylabel &#39;ρ(x)&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;plot &#39;rho_vs_x.dat&#39; u 1:2 w l lw 2 lc rgb &#39;#1f77b4&#39; t &#39;ρ(x)&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="IOUtils.write_gnuplot_convergence_script">
+<a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils.write_gnuplot_convergence_script">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_gnuplot_convergence_script</span><span class="p">(</span><span class="n">output_gp</span><span class="o">=</span><span class="s2">&quot;convergencia.gp&quot;</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_gp</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">g</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set term epscairo color</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set output &#39;convergencia.eps&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set title &#39;Convergencia SCF&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set xlabel &#39;Iteración&#39;</span><span class="se">\n</span><span class="s2">set ylabel &#39;|Δρ|&#39;</span><span class="se">\n</span><span class="s2">set logscale y</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;plot &#39;convergencia.dat&#39; u 1:2 w lp lw 2 lc rgb &#39;#d62728&#39; t &#39;error&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="IOUtils.open_eps">
+<a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils.open_eps">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">open_eps</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Abre un archivo EPS usando el visualizador predeterminado del sistema.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">platform</span>
+        <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Darwin&#39;</span><span class="p">:</span>       <span class="c1"># macOS</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span><span class="p">:</span>    <span class="c1"># Windows</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>                                   <span class="c1"># Linux</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;xdg-open&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="IOUtils.run_gnuplot">
+<a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils.run_gnuplot">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_gnuplot</span><span class="p">(</span><span class="o">*</span><span class="n">scripts</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ejecuta uno o varios scripts de gnuplot.</span>
+
+<span class="sd">        Parámetros</span>
+<span class="sd">        ----------</span>
+<span class="sd">        scripts : str</span>
+<span class="sd">            Nombres de archivos de script de gnuplot a ejecutar.</span>
+
+<span class="sd">        Ejemplo</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; IOUtils.run_gnuplot(&#39;plot.gp&#39;, &#39;convergencia.gp&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">script</span> <span class="ow">in</span> <span class="n">scripts</span><span class="p">:</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;gnuplot&quot;</span><span class="p">,</span> <span class="n">script</span><span class="p">])</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2025, Julian Cogua, Juan Esteban Neira.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

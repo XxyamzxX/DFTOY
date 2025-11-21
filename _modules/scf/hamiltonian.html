@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scf.hamiltonian &mdash; documentación de DFToy - 1.2</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=dab6a19e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=f85f4cfb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            DFToy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Módulos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">scf.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../grid.html">scf.grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hamiltonian.html">scf.hamiltonian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io_utils.html">io_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../potential.html">potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scf_loop.html">scf_loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../solver.html">solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DFToy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">scf.hamiltonian</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para scf.hamiltonian</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">hamiltonian</span>
+<span class="sd">===========</span>
+
+<span class="sd">Define estructuras para representar el Hamiltoniano 1D en forma tridiagonal,</span>
+<span class="sd">como se usa en métodos de diferencias finitas o discretización estándar en DFToy.</span>
+
+<span class="sd">La clase :class:`Hamiltonian1D` contiene las diagonales necesaria para construir</span>
+<span class="sd">la matriz completa y permite convertirla a una representación densa.</span>
+
+<span class="sd">Ejemplo</span>
+<span class="sd">-------</span>
+<span class="sd">&gt;&gt;&gt; import numpy as np</span>
+<span class="sd">&gt;&gt;&gt; from DFToy.hamiltonian import Hamiltonian1D</span>
+<span class="sd">&gt;&gt;&gt;</span>
+<span class="sd">&gt;&gt;&gt; diag = np.array([2., 2., 2.])</span>
+<span class="sd">&gt;&gt;&gt; off = np.array([-1., -1.])</span>
+<span class="sd">&gt;&gt;&gt; H = Hamiltonian1D.build(diag, off)</span>
+<span class="sd">&gt;&gt;&gt; H.to_dense()</span>
+<span class="sd">array([[ 2., -1.,  0.],</span>
+<span class="sd">       [-1.,  2., -1.],</span>
+<span class="sd">       [ 0., -1.,  2.]])</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+
+<div class="viewcode-block" id="Hamiltonian1D">
+<a class="viewcode-back" href="../../hamiltonian.html#scf.hamiltonian.Hamiltonian1D">[documentos]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Hamiltonian1D</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Representación tridiagonal de un Hamiltoniano 1D.</span>
+
+<span class="sd">    Esta clase almacena:</span>
+<span class="sd">    - ``diag``: la diagonal principal del Hamiltoniano.</span>
+<span class="sd">    - ``off``: la diagonal secundaria (superior e inferior), asumida simétrica.</span>
+
+<span class="sd">    El Hamiltoniano tridiagonal típico para problemas 1D discretizados</span>
+<span class="sd">    tiene la forma:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        H = \\begin{pmatrix}</span>
+<span class="sd">        d_0 &amp; o_0 &amp; 0   &amp; \\cdots &amp; 0 \\\\</span>
+<span class="sd">        o_0 &amp; d_1 &amp; o_1 &amp; \\cdots &amp; 0 \\\\</span>
+<span class="sd">        0   &amp; o_1 &amp; d_2 &amp; \\cdots &amp; 0 \\\\</span>
+<span class="sd">        \\vdots &amp; \\vdots &amp; \\vdots &amp; \\ddots &amp; \\vdots \\\\</span>
+<span class="sd">        0 &amp; 0 &amp; 0 &amp; \\cdots &amp; d_{N-1}</span>
+<span class="sd">        \\end{pmatrix}</span>
+
+<span class="sd">    Parámetros</span>
+<span class="sd">    ----------</span>
+<span class="sd">    diag : numpy.ndarray</span>
+<span class="sd">        Diagonal principal del Hamiltoniano (tamaño N).</span>
+<span class="sd">    off : numpy.ndarray</span>
+<span class="sd">        Diagonal secundaria superior/inferior (tamaño N-1).</span>
+
+<span class="sd">    Notas</span>
+<span class="sd">    -----</span>
+<span class="sd">    Esta representación es eficiente para construir rápidamente el operador cinético</span>
+<span class="sd">    o potencial en esquemas de diferencias finitas.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">diag</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">off</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+
+<div class="viewcode-block" id="Hamiltonian1D.build">
+<a class="viewcode-back" href="../../hamiltonian.html#scf.hamiltonian.Hamiltonian1D.build">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="n">diag</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">off</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construye una instancia de :class:`Hamiltonian1D` a partir de</span>
+<span class="sd">        sus diagonales.</span>
+
+<span class="sd">        Parámetros</span>
+<span class="sd">        ----------</span>
+<span class="sd">        diag : numpy.ndarray</span>
+<span class="sd">            Arreglo 1D con la diagonal principal.</span>
+<span class="sd">        off : numpy.ndarray</span>
+<span class="sd">            Arreglo 1D con los elementos de la diagonal secundaria.</span>
+
+<span class="sd">        Devuelve</span>
+<span class="sd">        --------</span>
+<span class="sd">        Hamiltonian1D</span>
+<span class="sd">            Instancia que contiene las diagonales especificadas.</span>
+
+<span class="sd">        Ejemplo</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; diag = np.array([1., 1., 1.])</span>
+<span class="sd">        &gt;&gt;&gt; off = np.array([-0.5, -0.5])</span>
+<span class="sd">        &gt;&gt;&gt; H = Hamiltonian1D.build(diag, off)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Hamiltonian1D</span><span class="p">(</span><span class="n">diag</span><span class="o">=</span><span class="n">diag</span><span class="p">,</span> <span class="n">off</span><span class="o">=</span><span class="n">off</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Hamiltonian1D.to_dense">
+<a class="viewcode-back" href="../../hamiltonian.html#scf.hamiltonian.Hamiltonian1D.to_dense">[documentos]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dense</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construye la matriz densa correspondiente al Hamiltoniano tridiagonal.</span>
+
+<span class="sd">        Devuelve</span>
+<span class="sd">        --------</span>
+<span class="sd">        numpy.ndarray of shape (N, N)</span>
+<span class="sd">            Matriz densa del Hamiltoniano.</span>
+
+<span class="sd">        Ejemplo</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; diag = np.array([2., 2., 2.])</span>
+<span class="sd">        &gt;&gt;&gt; off = np.array([-1., -1.])</span>
+<span class="sd">        &gt;&gt;&gt; H = Hamiltonian1D(diag, off)</span>
+<span class="sd">        &gt;&gt;&gt; H.to_dense()</span>
+<span class="sd">        array([[ 2., -1.,  0.],</span>
+<span class="sd">               [-1.,  2., -1.],</span>
+<span class="sd">               [ 0., -1.,  2.]])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">diag</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">diag</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">off</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">off</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">H</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2025, Julian Cogua, Juan Esteban Neira.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
