@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>scf.config &mdash; documentación de DFToy - 1.2</title>
+  <title>scf.config &mdash; documentación de dftoy - 1.2</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -34,7 +34,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            DFToy
+            dftoy
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -53,17 +53,17 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#scf.config.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.N"><code class="docutils literal notranslate"><span class="pre">Config.N</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.x_min"><code class="docutils literal notranslate"><span class="pre">Config.x_min</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.x_max"><code class="docutils literal notranslate"><span class="pre">Config.x_max</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.tolerance"><code class="docutils literal notranslate"><span class="pre">Config.tolerance</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.max_iter"><code class="docutils literal notranslate"><span class="pre">Config.max_iter</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.hbar"><code class="docutils literal notranslate"><span class="pre">Config.hbar</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.Np"><code class="docutils literal notranslate"><span class="pre">Config.Np</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.sigma"><code class="docutils literal notranslate"><span class="pre">Config.sigma</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.offset"><code class="docutils literal notranslate"><span class="pre">Config.offset</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.mix_alpha"><code class="docutils literal notranslate"><span class="pre">Config.mix_alpha</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.dx"><code class="docutils literal notranslate"><span class="pre">Config.dx()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.hbar"><code class="docutils literal notranslate"><span class="pre">Config.hbar</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.kinetic_coeff"><code class="docutils literal notranslate"><span class="pre">Config.kinetic_coeff()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.max_iter"><code class="docutils literal notranslate"><span class="pre">Config.max_iter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.mix_alpha"><code class="docutils literal notranslate"><span class="pre">Config.mix_alpha</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.offset"><code class="docutils literal notranslate"><span class="pre">Config.offset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.sigma"><code class="docutils literal notranslate"><span class="pre">Config.sigma</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.tolerance"><code class="docutils literal notranslate"><span class="pre">Config.tolerance</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.x_max"><code class="docutils literal notranslate"><span class="pre">Config.x_max</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.config.Config.x_min"><code class="docutils literal notranslate"><span class="pre">Config.x_min</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -82,7 +82,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">DFToy</a>
+          <a href="index.html">dftoy</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -166,53 +166,13 @@ mediante <cite>Config.Atributo</cite>.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="scf.config.Config.x_min">
-<span class="sig-name descname"><span class="pre">x_min</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-5.0</span></em><a class="headerlink" href="#scf.config.Config.x_min" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.config.Config.x_max">
-<span class="sig-name descname"><span class="pre">x_max</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5.0</span></em><a class="headerlink" href="#scf.config.Config.x_max" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.config.Config.tolerance">
-<span class="sig-name descname"><span class="pre">tolerance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1e-06</span></em><a class="headerlink" href="#scf.config.Config.tolerance" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.config.Config.max_iter">
-<span class="sig-name descname"><span class="pre">max_iter</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#scf.config.Config.max_iter" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.config.Config.hbar">
-<span class="sig-name descname"><span class="pre">hbar</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.config.Config.hbar" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="scf.config.Config.Np">
 <span class="sig-name descname"><span class="pre">Np</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#scf.config.Config.Np" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.config.Config.sigma">
-<span class="sig-name descname"><span class="pre">sigma</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.config.Config.sigma" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.config.Config.offset">
-<span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.config.Config.offset" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.config.Config.mix_alpha">
-<span class="sig-name descname"><span class="pre">mix_alpha</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.3</span></em><a class="headerlink" href="#scf.config.Config.mix_alpha" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="scf.config.Config.dx">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/config.html#Config.dx"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.config.Config.dx" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/scf/config.html#Config.dx"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.config.Config.dx" title="Link to this definition"></a></dt>
 <dd><p>Calcula el espaciamiento espacial <span class="math notranslate nohighlight">\(\Delta x\)</span> de la malla 1D.</p>
 <section id="parametros">
 <h3>Parámetros<a class="headerlink" href="#parametros" title="Link to this heading"></a></h3>
@@ -240,23 +200,16 @@ mediante <cite>Config.Atributo</cite>.</p>
 </pre></div>
 </div>
 </section>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>N</strong> (<em>int</em>)</p></li>
-<li><p><strong>x_min</strong> (<em>float</em>)</p></li>
-<li><p><strong>x_max</strong> (<em>float</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.config.Config.hbar">
+<span class="sig-name descname"><span class="pre">hbar</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.config.Config.hbar" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scf.config.Config.kinetic_coeff">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kinetic_coeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hbar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/config.html#Config.kinetic_coeff"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.config.Config.kinetic_coeff" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kinetic_coeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hbar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/scf/config.html#Config.kinetic_coeff"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.config.Config.kinetic_coeff" title="Link to this definition"></a></dt>
 <dd><p>Calcula el coeficiente cinético del operador laplaciano discreto.</p>
 <p>El coeficiente corresponde al término:</p>
 <div class="math notranslate nohighlight">
@@ -288,19 +241,42 @@ mediante <cite>Config.Atributo</cite>.</p>
 </pre></div>
 </div>
 </section>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>hbar</strong> (<em>float</em>)</p></li>
-<li><p><strong>m</strong> (<em>float</em>)</p></li>
-<li><p><strong>dx</strong> (<em>float</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.config.Config.max_iter">
+<span class="sig-name descname"><span class="pre">max_iter</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#scf.config.Config.max_iter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.config.Config.mix_alpha">
+<span class="sig-name descname"><span class="pre">mix_alpha</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.3</span></em><a class="headerlink" href="#scf.config.Config.mix_alpha" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.config.Config.offset">
+<span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.config.Config.offset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.config.Config.sigma">
+<span class="sig-name descname"><span class="pre">sigma</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#scf.config.Config.sigma" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.config.Config.tolerance">
+<span class="sig-name descname"><span class="pre">tolerance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1e-06</span></em><a class="headerlink" href="#scf.config.Config.tolerance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.config.Config.x_max">
+<span class="sig-name descname"><span class="pre">x_max</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5.0</span></em><a class="headerlink" href="#scf.config.Config.x_max" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.config.Config.x_min">
+<span class="sig-name descname"><span class="pre">x_min</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-5.0</span></em><a class="headerlink" href="#scf.config.Config.x_min" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </section>
 </dd></dl>
@@ -318,7 +294,7 @@ mediante <cite>Config.Atributo</cite>.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Derechos de autor 2025, Julian Cogua, Juan Esteban Neira.</p>
+    <p>&#169; Derechos de autor .</p>
   </div>
 
   Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un

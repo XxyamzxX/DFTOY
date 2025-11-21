@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>scf_loop &mdash; documentación de DFToy - 1.2</title>
+  <title>scf_loop &mdash; documentación de dftoy - 1.2</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -34,7 +34,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            DFToy
+            dftoy
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -56,15 +56,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#ejemplo">Ejemplo</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams"><code class="docutils literal notranslate"><span class="pre">InitialDensityParams</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams.guess_type"><code class="docutils literal notranslate"><span class="pre">InitialDensityParams.guess_type</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams.Np"><code class="docutils literal notranslate"><span class="pre">InitialDensityParams.Np</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams.sigma"><code class="docutils literal notranslate"><span class="pre">InitialDensityParams.sigma</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams.offset"><code class="docutils literal notranslate"><span class="pre">InitialDensityParams.offset</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="#scf.scf_loop.InitialDensityBuilder"><code class="docutils literal notranslate"><span class="pre">InitialDensityBuilder</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#scf.scf_loop.InitialDensityBuilder.build"><code class="docutils literal notranslate"><span class="pre">InitialDensityBuilder.build()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams"><code class="docutils literal notranslate"><span class="pre">InitialDensityParams</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams.Np"><code class="docutils literal notranslate"><span class="pre">InitialDensityParams.Np</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams.guess_type"><code class="docutils literal notranslate"><span class="pre">InitialDensityParams.guess_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams.offset"><code class="docutils literal notranslate"><span class="pre">InitialDensityParams.offset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams.sigma"><code class="docutils literal notranslate"><span class="pre">InitialDensityParams.sigma</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#scf.scf_loop.SCFRunner"><code class="docutils literal notranslate"><span class="pre">SCFRunner</span></code></a><ul>
@@ -82,7 +82,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">DFToy</a>
+          <a href="index.html">dftoy</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -131,59 +131,6 @@ la construcción del potencial efectivo y la iteración SCF hasta convergencia.<
 </section>
 </section>
 <dl class="py class">
-<dt class="sig sig-object py" id="scf.scf_loop.InitialDensityParams">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.scf_loop.</span></span><span class="sig-name descname"><span class="pre">InitialDensityParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guess_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Np</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/scf_loop.html#InitialDensityParams"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.InitialDensityParams" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Parámetros para construir la densidad inicial del ciclo SCF.</p>
-<section id="atributos">
-<h2>Atributos<a class="headerlink" href="#atributos" title="Link to this heading"></a></h2>
-<dl class="simple">
-<dt>guess_type<span class="classifier">int</span></dt><dd><p>Tipo de densidad inicial:
-1 → gaussiana centrada en 0,
-2 → suma de dos gaussianas centradas en ±offset,
-otro → densidad tipo Lorentziana.</p>
-</dd>
-<dt>Np<span class="classifier">int</span></dt><dd><p>Número de partículas o normalización de la densidad.</p>
-</dd>
-<dt>sigma<span class="classifier">float</span></dt><dd><p>Ancho de las gaussianas iniciales.</p>
-</dd>
-<dt>offset<span class="classifier">float</span></dt><dd><p>Desplazamiento de las gaussianas para <cite>guess_type=2</cite>.</p>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.scf_loop.InitialDensityParams.guess_type">
-<span class="sig-name descname"><span class="pre">guess_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#scf.scf_loop.InitialDensityParams.guess_type" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.scf_loop.InitialDensityParams.Np">
-<span class="sig-name descname"><span class="pre">Np</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#scf.scf_loop.InitialDensityParams.Np" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.scf_loop.InitialDensityParams.sigma">
-<span class="sig-name descname"><span class="pre">sigma</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#scf.scf_loop.InitialDensityParams.sigma" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.scf_loop.InitialDensityParams.offset">
-<span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#scf.scf_loop.InitialDensityParams.offset" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</section>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>guess_type</strong> (<em>int</em>)</p></li>
-<li><p><strong>Np</strong> (<em>int</em>)</p></li>
-<li><p><strong>sigma</strong> (<em>float</em>)</p></li>
-<li><p><strong>offset</strong> (<em>float</em>)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="scf.scf_loop.InitialDensityBuilder">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.scf_loop.</span></span><span class="sig-name descname"><span class="pre">InitialDensityBuilder</span></span><a class="reference internal" href="_modules/scf/scf_loop.html#InitialDensityBuilder"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.InitialDensityBuilder" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -196,7 +143,7 @@ otro → densidad tipo Lorentziana.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scf.scf_loop.InitialDensityBuilder.build">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/scf_loop.html#InitialDensityBuilder.build"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.InitialDensityBuilder.build" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="grid.html#scf.grid.Grid1D" title="scf.grid.Grid1D"><span class="pre">Grid1D</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#scf.scf_loop.InitialDensityParams" title="scf.scf_loop.InitialDensityParams"><span class="pre">InitialDensityParams</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/scf/scf_loop.html#InitialDensityBuilder.build"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.InitialDensityBuilder.build" title="Link to this definition"></a></dt>
 <dd><p>Genera la densidad inicial <span class="math notranslate nohighlight">\(ρ(x)\)</span> sobre la malla 1D.</p>
 <section id="parametros">
 <h3>Parámetros<a class="headerlink" href="#parametros" title="Link to this heading"></a></h3>
@@ -221,25 +168,57 @@ otro → densidad tipo Lorentziana.</p>
 - Suma de dos gaussianas desplazadas,
 - Densidad tipo Lorentziana.</p>
 </section>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>grid</strong> (<a class="reference internal" href="grid.html#scf.grid.Grid1D" title="scf.grid.Grid1D"><em>Grid1D</em></a>)</p></li>
-<li><p><strong>init</strong> (<a class="reference internal" href="#scf.scf_loop.InitialDensityParams" title="scf.scf_loop.InitialDensityParams"><em>InitialDensityParams</em></a>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>ndarray</em></p>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="scf.scf_loop.InitialDensityParams">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.scf_loop.</span></span><span class="sig-name descname"><span class="pre">InitialDensityParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guess_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Np</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/scf_loop.html#InitialDensityParams"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.InitialDensityParams" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parámetros para construir la densidad inicial del ciclo SCF.</p>
+<section id="atributos">
+<h2>Atributos<a class="headerlink" href="#atributos" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>guess_type<span class="classifier">int</span></dt><dd><p>Tipo de densidad inicial:
+1 → gaussiana centrada en 0,
+2 → suma de dos gaussianas centradas en ±offset,
+otro → densidad tipo Lorentziana.</p>
+</dd>
+<dt>Np<span class="classifier">int</span></dt><dd><p>Número de partículas o normalización de la densidad.</p>
+</dd>
+<dt>sigma<span class="classifier">float</span></dt><dd><p>Ancho de las gaussianas iniciales.</p>
+</dd>
+<dt>offset<span class="classifier">float</span></dt><dd><p>Desplazamiento de las gaussianas para <cite>guess_type=2</cite>.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.scf_loop.InitialDensityParams.Np">
+<span class="sig-name descname"><span class="pre">Np</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#scf.scf_loop.InitialDensityParams.Np" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.scf_loop.InitialDensityParams.guess_type">
+<span class="sig-name descname"><span class="pre">guess_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#scf.scf_loop.InitialDensityParams.guess_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.scf_loop.InitialDensityParams.offset">
+<span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#scf.scf_loop.InitialDensityParams.offset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.scf_loop.InitialDensityParams.sigma">
+<span class="sig-name descname"><span class="pre">sigma</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#scf.scf_loop.InitialDensityParams.sigma" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="scf.scf_loop.SCFRunner">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.scf_loop.</span></span><span class="sig-name descname"><span class="pre">SCFRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/scf_loop.html#SCFRunner"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.SCFRunner" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.scf_loop.</span></span><span class="sig-name descname"><span class="pre">SCFRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#scf.config.Config" title="scf.config.Config"><span class="pre">Config</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="grid.html#scf.grid.Grid1D" title="scf.grid.Grid1D"><span class="pre">Grid1D</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="potential.html#scf.potential.ExternalPotentialParams" title="scf.potential.ExternalPotentialParams"><span class="pre">ExternalPotentialParams</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/scf_loop.html#SCFRunner"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.SCFRunner" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Ejecuta el ciclo de autoconsistencia SCF.</p>
 <section id="id2">
@@ -267,7 +246,7 @@ otro → densidad tipo Lorentziana.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="scf.scf_loop.SCFRunner.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cancel_cb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/scf_loop.html#SCFRunner.run"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.SCFRunner.run" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cancel_cb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/scf_loop.html#SCFRunner.run"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.SCFRunner.run" title="Link to this definition"></a></dt>
 <dd><p>Ejecuta la iteración SCF hasta convergencia.</p>
 <section id="id4">
 <h3>Parámetros<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
@@ -296,26 +275,9 @@ otro → densidad tipo Lorentziana.</p>
 diagonaliza el Hamiltoniano tridiagonal con <cite>Solver.lowest_eigenpair_tridiagonal</cite>,
 aplica mezcla lineal de densidades y verifica convergencia según <cite>cfg.tolerance</cite>.</p>
 </section>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rho_init</strong> (<em>ndarray</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cfg</strong> (<a class="reference internal" href="config.html#scf.config.Config" title="scf.config.Config"><em>Config</em></a>)</p></li>
-<li><p><strong>grid</strong> (<a class="reference internal" href="grid.html#scf.grid.Grid1D" title="scf.grid.Grid1D"><em>Grid1D</em></a>)</p></li>
-<li><p><strong>ext</strong> (<a class="reference internal" href="potential.html#scf.potential.ExternalPotentialParams" title="scf.potential.ExternalPotentialParams"><em>ExternalPotentialParams</em></a>)</p></li>
-<li><p><strong>m</strong> (<em>float</em>)</p></li>
-<li><p><strong>k</strong> (<em>float</em>)</p></li>
-<li><p><strong>rho0</strong> (<em>float</em>)</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
@@ -331,7 +293,7 @@ aplica mezcla lineal de densidades y verifica convergencia según <cite>cfg.tole
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Derechos de autor 2025, Julian Cogua, Juan Esteban Neira.</p>
+    <p>&#169; Derechos de autor .</p>
   </div>
 
   Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un

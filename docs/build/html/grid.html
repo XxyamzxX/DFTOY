@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>scf.grid &mdash; documentación de DFToy - 1.2</title>
+  <title>scf.grid &mdash; documentación de dftoy - 1.2</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -34,7 +34,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            DFToy
+            dftoy
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -54,9 +54,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#scf.grid.Grid1D"><code class="docutils literal notranslate"><span class="pre">Grid1D</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#scf.grid.Grid1D.N"><code class="docutils literal notranslate"><span class="pre">Grid1D.N</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.grid.Grid1D.x_min"><code class="docutils literal notranslate"><span class="pre">Grid1D.x_min</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scf.grid.Grid1D.x_max"><code class="docutils literal notranslate"><span class="pre">Grid1D.x_max</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.grid.Grid1D.__post_init__"><code class="docutils literal notranslate"><span class="pre">Grid1D.__post_init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.grid.Grid1D.x_min"><code class="docutils literal notranslate"><span class="pre">Grid1D.x_min</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -74,7 +73,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">DFToy</a>
+          <a href="index.html">dftoy</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -116,7 +115,7 @@ y los límites del dominio.</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="scf.grid.Grid1D">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.grid.</span></span><span class="sig-name descname"><span class="pre">Grid1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/grid.html#Grid1D"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.grid.Grid1D" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.grid.</span></span><span class="sig-name descname"><span class="pre">Grid1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/grid.html#Grid1D"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.grid.Grid1D" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Malla espacial 1D uniforme para cálculos numéricos en DFToy.</p>
 <p>Esta clase genera una malla de puntos igualmente espaciados en el intervalo
@@ -152,43 +151,16 @@ de <code class="docutils literal notranslate"><span class="pre">x</span></code> 
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="scf.grid.Grid1D.x_min">
-<span class="sig-name descname"><span class="pre">x_min</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#scf.grid.Grid1D.x_min" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="scf.grid.Grid1D.x_max">
 <span class="sig-name descname"><span class="pre">x_max</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#scf.grid.Grid1D.x_max" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="scf.grid.Grid1D.__post_init__">
-<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/grid.html#Grid1D.__post_init__"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.grid.Grid1D.__post_init__" title="Link to this definition"></a></dt>
-<dd><p>Inicializa la malla espacial y calcula <cite>dx</cite>.</p>
-<p>Este método genera el arreglo de posiciones <code class="docutils literal notranslate"><span class="pre">x</span></code> usando
-<code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linspace()</span></code> y asigna el valor del espaciamiento <code class="docutils literal notranslate"><span class="pre">dx</span></code>.</p>
-<section id="id1">
-<h3>Ejemplo<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid1D</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">x_min</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">x_max</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="o">.</span><span class="n">x</span>
-<span class="go">array([0.  , 0.25, 0.5 , 0.75, 1.  ])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="o">.</span><span class="n">dx</span>
-<span class="go">0.25</span>
-</pre></div>
-</div>
-</section>
-</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.grid.Grid1D.x_min">
+<span class="sig-name descname"><span class="pre">x_min</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#scf.grid.Grid1D.x_min" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </section>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>N</strong> (<em>int</em>)</p></li>
-<li><p><strong>x_min</strong> (<em>float</em>)</p></li>
-<li><p><strong>x_max</strong> (<em>float</em>)</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
@@ -204,7 +176,7 @@ de <code class="docutils literal notranslate"><span class="pre">x</span></code> 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Derechos de autor 2025, Julian Cogua, Juan Esteban Neira.</p>
+    <p>&#169; Derechos de autor .</p>
   </div>
 
   Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
