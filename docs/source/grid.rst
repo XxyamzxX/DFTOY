@@ -1,5 +1,6 @@
 scf.grid
-====
+==========
+
 
 .. automodule:: scf.grid
     :members:

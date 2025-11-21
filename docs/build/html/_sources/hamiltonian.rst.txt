@@ -1,5 +1,5 @@
 scf.hamiltonian
-===========
+==========
 
 .. automodule:: scf.hamiltonian
     :members:

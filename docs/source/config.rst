@@ -1,5 +1,5 @@
 scf.config
-======
+==========
 
 .. automodule:: scf.config
     :members:

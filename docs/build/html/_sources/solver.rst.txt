@@ -1,5 +1,5 @@
 solver
-======
+==========
 
 .. automodule:: scf.solver
     :members:

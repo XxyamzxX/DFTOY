@@ -1,5 +1,5 @@
 scf_loop
-========
+==========
 
 .. automodule:: scf.scf_loop
     :members:

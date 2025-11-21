@@ -1,5 +1,5 @@
 DFToy
-=====
+==========
 
 Documentación del paquete **DFToy** para cálculos SCF 1D.
 

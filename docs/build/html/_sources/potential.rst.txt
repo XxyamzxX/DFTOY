@@ -1,5 +1,5 @@
 potential
-=========
+==========
 
 .. automodule:: scf.potential
     :members:
