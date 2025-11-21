@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>scf_loop &mdash; documentación de dftoy - 1.2</title>
+  <title>scf.scf_loop &mdash; documentación de DFToy - 1.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=dab6a19e"></script>
+      <script src="_static/documentation_options.js?v=4936afed"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/translations.js?v=f85f4cfb"></script>
@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="solver" href="solver.html" />
-    <link rel="prev" title="potential" href="potential.html" /> 
+    <link rel="next" title="scf.solver" href="solver.html" />
+    <link rel="prev" title="scf.potential" href="potential.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +34,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            dftoy
+            DFToy
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -44,15 +44,15 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Módulos</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contenido</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="config.html">scf.config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="grid.html">scf.grid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hamiltonian.html">scf.hamiltonian</a></li>
-<li class="toctree-l1"><a class="reference internal" href="io_utils.html">io_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="potential.html">potential</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">scf_loop</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">scf_loop</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="io_utils.html">scf.io_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="potential.html">scf.potential</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">scf.scf_loop</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#scf-loop">scf_loop</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ejemplo">Ejemplo</a></li>
 </ul>
 </li>
@@ -73,7 +73,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="solver.html">solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solver.html">scf.solver</a></li>
 </ul>
 
         </div>
@@ -82,7 +82,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">dftoy</a>
+          <a href="index.html">DFToy</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -90,7 +90,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">scf_loop</li>
+      <li class="breadcrumb-item active">scf.scf_loop</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/scf_loop.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
       </li>
@@ -101,9 +101,9 @@
            <div itemprop="articleBody">
              
   <section id="module-scf.scf_loop">
-<span id="scf-loop"></span><h1>scf_loop<a class="headerlink" href="#module-scf.scf_loop" title="Link to this heading"></a></h1>
-<section id="id1">
-<h2>scf_loop<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<span id="scf-scf-loop"></span><h1>scf.scf_loop<a class="headerlink" href="#module-scf.scf_loop" title="Link to this heading"></a></h1>
+<section id="scf-loop">
+<h2>scf_loop<a class="headerlink" href="#scf-loop" title="Link to this heading"></a></h2>
 <p>Este módulo contiene las rutinas principales del ciclo de autoconsistencia (SCF)
 para el software <strong>DFToy</strong> en 1D. Incluye la generación de la densidad inicial,
 la construcción del potencial efectivo y la iteración SCF hasta convergencia.</p>
@@ -221,8 +221,8 @@ otro → densidad tipo Lorentziana.</p>
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.scf_loop.</span></span><span class="sig-name descname"><span class="pre">SCFRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="config.html#scf.config.Config" title="scf.config.Config"><span class="pre">Config</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="grid.html#scf.grid.Grid1D" title="scf.grid.Grid1D"><span class="pre">Grid1D</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="potential.html#scf.potential.ExternalPotentialParams" title="scf.potential.ExternalPotentialParams"><span class="pre">ExternalPotentialParams</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/scf_loop.html#SCFRunner"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.SCFRunner" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Ejecuta el ciclo de autoconsistencia SCF.</p>
-<section id="id2">
-<h2>Atributos<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id1">
+<h2>Atributos<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <dl class="simple">
 <dt>cfg<span class="classifier">Config</span></dt><dd><p>Configuración global del cálculo.</p>
 </dd>
@@ -238,8 +238,8 @@ otro → densidad tipo Lorentziana.</p>
 </dd>
 </dl>
 </section>
-<section id="id3">
-<h2>Métodos<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id2">
+<h2>Métodos<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <dl class="simple">
 <dt>run(rho_init, cancel_cb=None, q=None)</dt><dd><p>Ejecuta el ciclo SCF hasta convergencia o cancelación.</p>
 </dd>
@@ -248,8 +248,8 @@ otro → densidad tipo Lorentziana.</p>
 <dt class="sig sig-object py" id="scf.scf_loop.SCFRunner.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cancel_cb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/scf_loop.html#SCFRunner.run"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.scf_loop.SCFRunner.run" title="Link to this definition"></a></dt>
 <dd><p>Ejecuta la iteración SCF hasta convergencia.</p>
-<section id="id4">
-<h3>Parámetros<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id3">
+<h3>Parámetros<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>rho_init<span class="classifier">numpy.ndarray</span></dt><dd><p>Densidad inicial sobre la malla.</p>
 </dd>
@@ -259,8 +259,8 @@ otro → densidad tipo Lorentziana.</p>
 </dd>
 </dl>
 </section>
-<section id="id5">
-<h3>Devuelve<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id4">
+<h3>Devuelve<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>dict</dt><dd><p>Diccionario con:
 - «mu»: energía del orbital más bajo,
@@ -269,8 +269,8 @@ otro → densidad tipo Lorentziana.</p>
 </dd>
 </dl>
 </section>
-<section id="id6">
-<h3>Notas<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id5">
+<h3>Notas<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <p>Calcula el potencial efectivo usando <cite>Potentials.v_eff</cite>,
 diagonaliza el Hamiltoniano tridiagonal con <cite>Solver.lowest_eigenpair_tridiagonal</cite>,
 aplica mezcla lineal de densidades y verifica convergencia según <cite>cfg.tolerance</cite>.</p>
@@ -286,14 +286,14 @@ aplica mezcla lineal de densidades y verifica convergencia según <cite>cfg.tole
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
-        <a href="potential.html" class="btn btn-neutral float-left" title="potential" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
-        <a href="solver.html" class="btn btn-neutral float-right" title="solver" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="potential.html" class="btn btn-neutral float-left" title="scf.potential" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="solver.html" class="btn btn-neutral float-right" title="scf.solver" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Derechos de autor .</p>
+    <p>&#169; Derechos de autor 2025, Juan Esteban Neira Díaz, Julián Cogua Arévalo.</p>
   </div>
 
   Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un

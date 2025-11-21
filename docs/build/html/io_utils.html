@@ -6,21 +6,21 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>io_utils &mdash; documentación de dftoy - 1.2</title>
+  <title>scf.io_utils &mdash; documentación de DFToy - 1.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=dab6a19e"></script>
+      <script src="_static/documentation_options.js?v=4936afed"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/translations.js?v=f85f4cfb"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="potential" href="potential.html" />
+    <link rel="next" title="scf.potential" href="potential.html" />
     <link rel="prev" title="scf.hamiltonian" href="hamiltonian.html" /> 
 </head>
 
@@ -33,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            dftoy
+            DFToy
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -43,13 +43,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Módulos</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contenido</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="config.html">scf.config</a></li>
 <li class="toctree-l1"><a class="reference internal" href="grid.html">scf.grid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hamiltonian.html">scf.hamiltonian</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">io_utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">io_utils</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">scf.io_utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#io-utils">io_utils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ejemplo">Ejemplo</a></li>
 </ul>
 </li>
@@ -63,9 +63,9 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="potential.html">potential</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scf_loop.html">scf_loop</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solver.html">solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="potential.html">scf.potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scf_loop.html">scf.scf_loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solver.html">scf.solver</a></li>
 </ul>
 
         </div>
@@ -74,7 +74,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">dftoy</a>
+          <a href="index.html">DFToy</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -82,7 +82,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">io_utils</li>
+      <li class="breadcrumb-item active">scf.io_utils</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/io_utils.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
       </li>
@@ -93,9 +93,9 @@
            <div itemprop="articleBody">
              
   <section id="module-scf.io_utils">
-<span id="io-utils"></span><h1>io_utils<a class="headerlink" href="#module-scf.io_utils" title="Link to this heading"></a></h1>
-<section id="id1">
-<h2>io_utils<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<span id="scf-io-utils"></span><h1>scf.io_utils<a class="headerlink" href="#module-scf.io_utils" title="Link to this heading"></a></h1>
+<section id="io-utils">
+<h2>io_utils<a class="headerlink" href="#io-utils" title="Link to this heading"></a></h2>
 <p>Proporciona utilidades de entrada/salida para DFToy, incluyendo funciones
 para guardar densidades electrónicas y generar scripts de gnuplot para
 visualizar densidades y convergencia SCF.</p>
@@ -135,8 +135,8 @@ convergencia SCF.</p>
 </dd>
 </dl>
 </section>
-<section id="id2">
-<h2>Ejemplo<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id1">
+<h2>Ejemplo<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOUtils</span><span class="o">.</span><span class="n">run_gnuplot</span><span class="p">(</span><span class="s1">&#39;plot.gp&#39;</span><span class="p">,</span> <span class="s1">&#39;convergencia.gp&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -167,13 +167,13 @@ convergencia SCF.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
         <a href="hamiltonian.html" class="btn btn-neutral float-left" title="scf.hamiltonian" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
-        <a href="potential.html" class="btn btn-neutral float-right" title="potential" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="potential.html" class="btn btn-neutral float-right" title="scf.potential" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Derechos de autor .</p>
+    <p>&#169; Derechos de autor 2025, Juan Esteban Neira Díaz, Julián Cogua Arévalo.</p>
   </div>
 
   Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un

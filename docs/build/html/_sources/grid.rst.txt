@@ -1,8 +1,7 @@
 scf.grid
-==========
-
+========
 
 .. automodule:: scf.grid
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

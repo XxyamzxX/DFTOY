@@ -1,7 +1,7 @@
-solver
+scf.solver
 ==========
 
 .. automodule:: scf.solver
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
