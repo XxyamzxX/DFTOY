@@ -76,8 +76,7 @@
            <div itemprop="articleBody">
              
   <h1>Código fuente para scf.io_utils</h1><div class="highlight"><pre>
-<span></span><span class="c1"># scf/io_utils.py</span>
-<span class="c1"># -*- coding: utf-8 -*-</span>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">io_utils</span>
 <span class="sd">========</span>
@@ -92,9 +91,11 @@
 <span class="sd">&gt;&gt;&gt; IOUtils.save_density([0,1,2], [0.1,0.2,0.3], filename=&#39;rho.dat&#39;)</span>
 <span class="sd">&gt;&gt;&gt; IOUtils.write_gnuplot_density_script(E=0.5, potential_type=3)</span>
 <span class="sd">&gt;&gt;&gt; IOUtils.write_gnuplot_convergence_script()</span>
+<span class="sd">&gt;&gt;&gt; IOUtils.run_gnuplot(&#39;plot.gp&#39;, &#39;convergencia.gp&#39;)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 
 
 <div class="viewcode-block" id="IOUtils">
@@ -112,33 +113,6 @@
 <a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils.save_density">[documentos]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">save_density</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;rho_vs_x.dat&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Guarda la densidad electrónica ρ(x) en un archivo de texto.</span>
-
-<span class="sd">        Permite exportar la densidad calculada para graficarla o analizarla posteriormente.</span>
-
-<span class="sd">        Parámetros</span>
-<span class="sd">        ----------</span>
-<span class="sd">        x : array_like</span>
-<span class="sd">            Vector de posiciones x de la malla.</span>
-<span class="sd">        rho : array_like</span>
-<span class="sd">            Vector de densidad correspondiente a cada posición x.</span>
-<span class="sd">        filename : str, opcional</span>
-<span class="sd">            Nombre del archivo de salida. Por defecto &#39;rho_vs_x.dat&#39;.</span>
-
-<span class="sd">        Devuelve</span>
-<span class="sd">        -------</span>
-<span class="sd">        None</span>
-
-<span class="sd">        Notas</span>
-<span class="sd">        -----</span>
-<span class="sd">        Se escribe un archivo de texto con dos columnas: x y ρ(x), separado por espacios.</span>
-<span class="sd">        Si el archivo ya existía, se sobrescribe.</span>
-
-<span class="sd">        Ejemplo</span>
-<span class="sd">        -------</span>
-<span class="sd">        &gt;&gt;&gt; IOUtils.save_density([0,1,2], [0.1,0.2,0.3], filename=&#39;rho.dat&#39;)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">rhoi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">xi</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">rhoi</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
@@ -148,35 +122,6 @@
 <a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils.write_gnuplot_density_script">[documentos]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">write_gnuplot_density_script</span><span class="p">(</span><span class="n">E</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">potential_type</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_gp</span><span class="o">=</span><span class="s2">&quot;plot.gp&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Genera un script de gnuplot para graficar la densidad ρ(x) según el potencial.</span>
-
-<span class="sd">        Parámetros</span>
-<span class="sd">        ----------</span>
-<span class="sd">        E : float</span>
-<span class="sd">            Energía del sistema correspondiente a la densidad.</span>
-<span class="sd">        potential_type : int</span>
-<span class="sd">            Tipo de potencial:</span>
-<span class="sd">            1 → V(x) = α |x|</span>
-<span class="sd">            2 → V(x) = β (x² - a²)²</span>
-<span class="sd">            3 → V(x) = 0.5 m ω² x²</span>
-<span class="sd">            4 → V(x) pozo cuadrado</span>
-<span class="sd">        output_gp : str, opcional</span>
-<span class="sd">            Nombre del archivo de salida del script gnuplot. Por defecto &#39;plot.gp&#39;.</span>
-
-<span class="sd">        Devuelve</span>
-<span class="sd">        -------</span>
-<span class="sd">        None</span>
-
-<span class="sd">        Notas</span>
-<span class="sd">        -----</span>
-<span class="sd">        El script generado crea un gráfico EPS con ρ(x) vs x.</span>
-<span class="sd">        El título del gráfico incluye el tipo de potencial y la energía E.</span>
-
-<span class="sd">        Ejemplo</span>
-<span class="sd">        -------</span>
-<span class="sd">        &gt;&gt;&gt; IOUtils.write_gnuplot_density_script(E=0.5, potential_type=3)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">title_map</span> <span class="o">=</span> <span class="p">{</span>
             <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Densidad para V(x)=α|x|&quot;</span><span class="p">,</span>
             <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;Densidad para V(x)=β(x^2-a^2)^2&quot;</span><span class="p">,</span>
@@ -195,35 +140,49 @@
 <a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils.write_gnuplot_convergence_script">[documentos]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">write_gnuplot_convergence_script</span><span class="p">(</span><span class="n">output_gp</span><span class="o">=</span><span class="s2">&quot;convergencia.gp&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Genera un script de gnuplot para graficar la convergencia del ciclo SCF.</span>
-
-<span class="sd">        Parámetros</span>
-<span class="sd">        ----------</span>
-<span class="sd">        output_gp : str, opcional</span>
-<span class="sd">            Nombre del archivo de salida del script gnuplot. Por defecto &#39;convergencia.gp&#39;.</span>
-
-<span class="sd">        Devuelve</span>
-<span class="sd">        -------</span>
-<span class="sd">        None</span>
-
-<span class="sd">        Notas</span>
-<span class="sd">        -----</span>
-<span class="sd">        El script genera un gráfico EPS de |Δρ| vs iteración en escala logarítmica.</span>
-<span class="sd">        Permite visualizar el progreso y la estabilidad de la convergencia SCF.</span>
-
-<span class="sd">        Ejemplo</span>
-<span class="sd">        -------</span>
-<span class="sd">        &gt;&gt;&gt; IOUtils.write_gnuplot_convergence_script()</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_gp</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">g</span><span class="p">:</span>
             <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set term epscairo color</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set output &#39;convergencia.eps&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set title &#39;Convergencia SCF&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set xlabel &#39;Iteración&#39;</span><span class="se">\n</span><span class="s2">set ylabel &#39;|Δρ|&#39;</span><span class="se">\n</span><span class="s2">set logscale y</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;plot &#39;convergencia.dat&#39; u 1:2 w lp lw 2 lc rgb &#39;#d62728&#39; t &#39;error&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
-</div>
 
+
+<div class="viewcode-block" id="IOUtils.open_eps">
+<a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils.open_eps">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">open_eps</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Abre un archivo EPS usando el visualizador predeterminado del sistema.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">platform</span>
+        <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Darwin&#39;</span><span class="p">:</span>       <span class="c1"># macOS</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span><span class="p">:</span>    <span class="c1"># Windows</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>                                   <span class="c1"># Linux</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;xdg-open&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="IOUtils.run_gnuplot">
+<a class="viewcode-back" href="../../io_utils.html#scf.io_utils.IOUtils.run_gnuplot">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_gnuplot</span><span class="p">(</span><span class="o">*</span><span class="n">scripts</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ejecuta uno o varios scripts de gnuplot.</span>
+
+<span class="sd">        Parámetros</span>
+<span class="sd">        ----------</span>
+<span class="sd">        scripts : str</span>
+<span class="sd">            Nombres de archivos de script de gnuplot a ejecutar.</span>
+
+<span class="sd">        Ejemplo</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; IOUtils.run_gnuplot(&#39;plot.gp&#39;, &#39;convergencia.gp&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">script</span> <span class="ow">in</span> <span class="n">scripts</span><span class="p">:</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;gnuplot&quot;</span><span class="p">,</span> <span class="n">script</span><span class="p">])</span></div>
+</div>
 
 </pre></div>
 
