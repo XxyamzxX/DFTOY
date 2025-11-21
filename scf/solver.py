@@ -10,7 +10,7 @@ discreto en DFToy. Incluye normalización de funciones de onda.
 
 Contiene la clase:
 - `Solver`: métodos estáticos para cálculo de eigenpares y normalización.
-  
+  
 Ejemplo
 -------
 >>> import numpy as np
@@ -23,7 +23,6 @@ Ejemplo
 
 import numpy as np
 import math
-
 
 class Solver:
     """

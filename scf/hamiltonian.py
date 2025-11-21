@@ -6,7 +6,7 @@ hamiltonian
 Define estructuras para representar el Hamiltoniano 1D en forma tridiagonal,
 como se usa en métodos de diferencias finitas o discretización estándar en DFToy.
 
-La clase :class:`Hamiltonian1D` contiene las diagonales necesaria para construir
+La clase :class:`Hamiltonian1D` contiene las diagonales necesarias para construir
 la matriz completa y permite convertirla a una representación densa.
 
 Ejemplo
@@ -25,7 +25,6 @@ array([[ 2., -1.,  0.],
 
 import numpy as np
 from dataclasses import dataclass
-
 
 @dataclass
 class Hamiltonian1D:

@@ -26,7 +26,6 @@ import numpy as np
 import math
 from dataclasses import dataclass
 
-
 @dataclass
 class ExternalPotentialParams:
     """
@@ -61,7 +60,6 @@ class ExternalPotentialParams:
     omega_ext: float = 1.0
     V0: float = 1.0
     L: float = 2.0
-
 
 class Potentials:
     """

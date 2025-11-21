@@ -10,7 +10,7 @@ Este módulo centraliza todas las configuraciones numéricas y físicas del cál
 para asegurar consistencia en todo el programa.
 
 Contiene además dos métodos utilitarios que permiten calcular:
-- el espaciamiento espacial `dx` de la malla, y  
+- el espaciamiento espacial `dx` de la malla, y  
 - el coeficiente cinético para el operador laplaciano discreto.
 
 Ejemplo
@@ -22,7 +22,6 @@ Ejemplo
 """
 
 import math
-
 
 class Config:
     """
@@ -138,7 +137,6 @@ class Config:
         >>> dx = Config.dx(200, -5, 5)
         >>> coeff = Config.kinetic_coeff(1.0, m=1.0, dx=dx)
         >>> print(coeff)
-        -198.0  # (aprox)
+        -198.0  # (aprox)
         """
         return -hbar * hbar / (2.0 * m * dx * dx)
-

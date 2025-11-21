@@ -2,19 +2,22 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))  # raíz del proyecto, donde están scf/ y gui_app/
+sys.path.insert(0, os.path.abspath('../..'))  # <-- Esto es esencial, añade la raíz del proyecto (python/)
 
 # -- Project information -----------------------------------------------------
-project = 'dftoy'
-author = 'Julian Cogua, Juan Esteban Neira'
-release = '1.2'
+project = 'DFToy'
+copyright = '2025, Juan Esteban Neira Díaz, Julián Cogua Arévalo'
+author = 'Juan Esteban Neira Díaz, Julián Cogua Arévalo'
+release = '1.0'
 
 # -- General configuration ---------------------------------------------------
 extensions = [
-    "sphinx.ext.autodoc",      # Extrae docstrings automáticamente
-    "sphinx.ext.napoleon",     # Soporte para docstrings estilo NumPy/Google
-    "sphinx.ext.viewcode"      # Enlaces al código fuente
+    "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.autosummary"
 ]
+autosummary_generate = True
 
 templates_path = ['_templates']
 exclude_patterns = []
@@ -22,5 +25,6 @@ exclude_patterns = []
 language = 'es'
 
 # -- Options for HTML output -------------------------------------------------
-html_theme = 'sphinx_rtd_theme'   # Tema moderno tipo ReadTheDocs
+html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+

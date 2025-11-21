@@ -39,7 +39,6 @@ from .potential import ExternalPotentialParams, Potentials
 from .hamiltonian import Hamiltonian1D
 from .solver import Solver
 
-
 @dataclass
 class InitialDensityParams:
     """
@@ -63,7 +62,6 @@ class InitialDensityParams:
     Np: int
     sigma: float
     offset: float
-
 
 class InitialDensityBuilder:
     """
@@ -112,7 +110,6 @@ class InitialDensityBuilder:
         if integral > 0:
             rho = rho * (init.Np / integral)
         return rho
-
 
 class SCFRunner:
     """

@@ -1,7 +1,7 @@
-potential
-==========
+scf.potential
+=============
 
 .. automodule:: scf.potential
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

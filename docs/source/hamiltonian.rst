@@ -1,7 +1,7 @@
 scf.hamiltonian
-==========
+===============
 
 .. automodule:: scf.hamiltonian
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

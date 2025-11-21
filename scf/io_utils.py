@@ -19,7 +19,6 @@ Ejemplo
 from pathlib import Path
 import subprocess
 
-
 class IOUtils:
     """
     Clase estática con métodos de entrada/salida de datos.

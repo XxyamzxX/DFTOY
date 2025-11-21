@@ -3,7 +3,7 @@
 grid
 ====
 
-Define estructuras de malla espacial utilizadas en DFToy.  
+Define estructuras de malla espacial utilizadas en DFToy.
 Actualmente incluye la clase :class:`Grid1D`, una malla uniforme en una dimensión,
 usada como base para representar funciones dependientes del espacio, operadores
 discretizados y densidades electrónicas.
@@ -21,9 +21,9 @@ Ejemplo
 [-5.         -4.94974874 -4.89949749 -4.84924623 -4.79899497]
 """
 
+
 import numpy as np
 from dataclasses import dataclass
-
 
 @dataclass
 class Grid1D:
