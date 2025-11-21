@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>io_utils &mdash; documentación de DFToy - 1.2</title>
+  <title>io_utils &mdash; documentación de dftoy - 1.2</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -33,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            DFToy
+            dftoy
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -54,11 +54,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#scf.io_utils.IOUtils"><code class="docutils literal notranslate"><span class="pre">IOUtils</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#scf.io_utils.IOUtils.save_density"><code class="docutils literal notranslate"><span class="pre">IOUtils.save_density()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.io_utils.IOUtils.write_gnuplot_density_script"><code class="docutils literal notranslate"><span class="pre">IOUtils.write_gnuplot_density_script()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.io_utils.IOUtils.write_gnuplot_convergence_script"><code class="docutils literal notranslate"><span class="pre">IOUtils.write_gnuplot_convergence_script()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scf.io_utils.IOUtils.open_eps"><code class="docutils literal notranslate"><span class="pre">IOUtils.open_eps()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scf.io_utils.IOUtils.run_gnuplot"><code class="docutils literal notranslate"><span class="pre">IOUtils.run_gnuplot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.io_utils.IOUtils.save_density"><code class="docutils literal notranslate"><span class="pre">IOUtils.save_density()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.io_utils.IOUtils.write_gnuplot_convergence_script"><code class="docutils literal notranslate"><span class="pre">IOUtils.write_gnuplot_convergence_script()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf.io_utils.IOUtils.write_gnuplot_density_script"><code class="docutils literal notranslate"><span class="pre">IOUtils.write_gnuplot_density_script()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -74,7 +74,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">DFToy</a>
+          <a href="index.html">dftoy</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -119,37 +119,9 @@ visualizar densidades y convergencia SCF.</p>
 texto y generar scripts de gnuplot para graficar densidad y
 convergencia SCF.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="scf.io_utils.IOUtils.save_density">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rho_vs_x.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/io_utils.html#IOUtils.save_density"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.io_utils.IOUtils.save_density" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scf.io_utils.IOUtils.write_gnuplot_density_script">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_gnuplot_density_script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">potential_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_gp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'plot.gp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/io_utils.html#IOUtils.write_gnuplot_density_script"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.io_utils.IOUtils.write_gnuplot_density_script" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>E</strong> (<em>float</em>)</p></li>
-<li><p><strong>potential_type</strong> (<em>int</em>)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="scf.io_utils.IOUtils.write_gnuplot_convergence_script">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_gnuplot_convergence_script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_gp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'convergencia.gp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/io_utils.html#IOUtils.write_gnuplot_convergence_script"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.io_utils.IOUtils.write_gnuplot_convergence_script" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="scf.io_utils.IOUtils.open_eps">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open_eps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/io_utils.html#IOUtils.open_eps"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.io_utils.IOUtils.open_eps" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open_eps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/io_utils.html#IOUtils.open_eps"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.io_utils.IOUtils.open_eps" title="Link to this definition"></a></dt>
 <dd><p>Abre un archivo EPS usando el visualizador predeterminado del sistema.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -171,6 +143,21 @@ convergencia SCF.</p>
 </section>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="scf.io_utils.IOUtils.save_density">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rho_vs_x.dat'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/io_utils.html#IOUtils.save_density"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.io_utils.IOUtils.save_density" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scf.io_utils.IOUtils.write_gnuplot_convergence_script">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_gnuplot_convergence_script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_gp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'convergencia.gp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/io_utils.html#IOUtils.write_gnuplot_convergence_script"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.io_utils.IOUtils.write_gnuplot_convergence_script" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scf.io_utils.IOUtils.write_gnuplot_density_script">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_gnuplot_density_script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">potential_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_gp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'plot.gp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/io_utils.html#IOUtils.write_gnuplot_density_script"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.io_utils.IOUtils.write_gnuplot_density_script" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </section>
@@ -186,7 +173,7 @@ convergencia SCF.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Derechos de autor 2025, Julian Cogua, Juan Esteban Neira.</p>
+    <p>&#169; Derechos de autor .</p>
   </div>
 
   Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un

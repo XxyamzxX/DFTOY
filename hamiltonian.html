@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>scf.hamiltonian &mdash; documentación de DFToy - 1.2</title>
+  <title>scf.hamiltonian &mdash; documentación de dftoy - 1.2</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -34,7 +34,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            DFToy
+            dftoy
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -54,9 +54,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#scf.hamiltonian.Hamiltonian1D"><code class="docutils literal notranslate"><span class="pre">Hamiltonian1D</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scf.hamiltonian.Hamiltonian1D.build"><code class="docutils literal notranslate"><span class="pre">Hamiltonian1D.build()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scf.hamiltonian.Hamiltonian1D.diag"><code class="docutils literal notranslate"><span class="pre">Hamiltonian1D.diag</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scf.hamiltonian.Hamiltonian1D.off"><code class="docutils literal notranslate"><span class="pre">Hamiltonian1D.off</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scf.hamiltonian.Hamiltonian1D.build"><code class="docutils literal notranslate"><span class="pre">Hamiltonian1D.build()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scf.hamiltonian.Hamiltonian1D.to_dense"><code class="docutils literal notranslate"><span class="pre">Hamiltonian1D.to_dense()</span></code></a></li>
 </ul>
 </li>
@@ -74,7 +74,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">DFToy</a>
+          <a href="index.html">dftoy</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -118,7 +118,7 @@ la matriz completa y permite convertirla a una representación densa.</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="scf.hamiltonian.Hamiltonian1D">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.hamiltonian.</span></span><span class="sig-name descname"><span class="pre">Hamiltonian1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">off</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/hamiltonian.html#Hamiltonian1D"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.hamiltonian.Hamiltonian1D" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">scf.hamiltonian.</span></span><span class="sig-name descname"><span class="pre">Hamiltonian1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">off</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/hamiltonian.html#Hamiltonian1D"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.hamiltonian.Hamiltonian1D" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Representación tridiagonal de un Hamiltoniano 1D.</p>
 <p>Esta clase almacena:
@@ -147,19 +147,9 @@ o_0 &amp; d_1 &amp; o_1 &amp; \cdots &amp; 0 \\
 <h2>Notas<a class="headerlink" href="#notas" title="Link to this heading"></a></h2>
 <p>Esta representación es eficiente para construir rápidamente el operador cinético
 o potencial en esquemas de diferencias finitas.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.hamiltonian.Hamiltonian1D.diag">
-<span class="sig-name descname"><span class="pre">diag</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#scf.hamiltonian.Hamiltonian1D.diag" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="scf.hamiltonian.Hamiltonian1D.off">
-<span class="sig-name descname"><span class="pre">off</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#scf.hamiltonian.Hamiltonian1D.off" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="scf.hamiltonian.Hamiltonian1D.build">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">off</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/hamiltonian.html#Hamiltonian1D.build"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.hamiltonian.Hamiltonian1D.build" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">off</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/hamiltonian.html#Hamiltonian1D.build"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.hamiltonian.Hamiltonian1D.build" title="Link to this definition"></a></dt>
 <dd><p>Construye una instancia de <a class="reference internal" href="#scf.hamiltonian.Hamiltonian1D" title="scf.hamiltonian.Hamiltonian1D"><code class="xref py py-class docutils literal notranslate"><span class="pre">Hamiltonian1D</span></code></a> a partir de
 sus diagonales.</p>
 <section id="id1">
@@ -186,19 +176,21 @@ sus diagonales.</p>
 </pre></div>
 </div>
 </section>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>diag</strong> (<em>ndarray</em>)</p></li>
-<li><p><strong>off</strong> (<em>ndarray</em>)</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.hamiltonian.Hamiltonian1D.diag">
+<span class="sig-name descname"><span class="pre">diag</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#scf.hamiltonian.Hamiltonian1D.diag" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scf.hamiltonian.Hamiltonian1D.off">
+<span class="sig-name descname"><span class="pre">off</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#scf.hamiltonian.Hamiltonian1D.off" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scf.hamiltonian.Hamiltonian1D.to_dense">
-<span class="sig-name descname"><span class="pre">to_dense</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scf/hamiltonian.html#Hamiltonian1D.to_dense"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.hamiltonian.Hamiltonian1D.to_dense" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_dense</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/scf/hamiltonian.html#Hamiltonian1D.to_dense"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#scf.hamiltonian.Hamiltonian1D.to_dense" title="Link to this definition"></a></dt>
 <dd><p>Construye la matriz densa correspondiente al Hamiltoniano tridiagonal.</p>
 <section id="id3">
 <h3>Devuelve<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
@@ -219,22 +211,9 @@ sus diagonales.</p>
 </pre></div>
 </div>
 </section>
-<dl class="field-list simple">
-<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>ndarray</em></p>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>diag</strong> (<em>ndarray</em>)</p></li>
-<li><p><strong>off</strong> (<em>ndarray</em>)</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
@@ -250,7 +229,7 @@ sus diagonales.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Derechos de autor 2025, Julian Cogua, Juan Esteban Neira.</p>
+    <p>&#169; Derechos de autor .</p>
   </div>
 
   Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un

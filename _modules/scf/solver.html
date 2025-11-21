@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scf.solver &mdash; documentación de dftoy - 1.2</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=dab6a19e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=f85f4cfb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            dftoy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Módulos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">scf.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../grid.html">scf.grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hamiltonian.html">scf.hamiltonian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io_utils.html">io_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../potential.html">potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scf_loop.html">scf_loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../solver.html">solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">dftoy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">scf.solver</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para scf.solver</h1><div class="highlight"><pre>
+<span></span><span class="c1"># scf/solver.py</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">solver</span>
+<span class="sd">======</span>
+
+<span class="sd">Proporciona métodos para resolver problemas de valores y vectores propios</span>
+<span class="sd">de matrices tridiagonales 1D, típicamente usadas para el Hamiltoniano</span>
+<span class="sd">discreto en DFToy. Incluye normalización de funciones de onda.</span>
+
+<span class="sd">Contiene la clase:</span>
+<span class="sd">- `Solver`: métodos estáticos para cálculo de eigenpares y normalización.</span>
+<span class="sd">  </span>
+<span class="sd">Ejemplo</span>
+<span class="sd">-------</span>
+<span class="sd">&gt;&gt;&gt; import numpy as np</span>
+<span class="sd">&gt;&gt;&gt; from scf.solver import Solver</span>
+<span class="sd">&gt;&gt;&gt; diag = np.array([1.0, 2.0, 3.0])</span>
+<span class="sd">&gt;&gt;&gt; off = np.array([-1.0, -1.0])</span>
+<span class="sd">&gt;&gt;&gt; mu, phi0 = Solver.lowest_eigenpair_tridiagonal(diag, off)</span>
+<span class="sd">&gt;&gt;&gt; print(mu)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+
+<div class="viewcode-block" id="Solver">
+<a class="viewcode-back" href="../../solver.html#scf.solver.Solver">[documentos]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Solver</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Métodos estáticos para resolver eigenpares de matrices tridiagonales</span>
+<span class="sd">    y normalizar funciones de onda.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Solver.lowest_eigenpair_tridiagonal">
+<a class="viewcode-back" href="../../solver.html#scf.solver.Solver.lowest_eigenpair_tridiagonal">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lowest_eigenpair_tridiagonal</span><span class="p">(</span><span class="n">diag</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">off</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcula el valor propio más bajo y su vector propio asociado</span>
+<span class="sd">        de una matriz tridiagonal.</span>
+
+<span class="sd">        Parámetros</span>
+<span class="sd">        ----------</span>
+<span class="sd">        diag : np.ndarray</span>
+<span class="sd">            Elementos de la diagonal principal.</span>
+<span class="sd">        off : np.ndarray</span>
+<span class="sd">            Elementos de las diagonales off-diagonal (k=±1).</span>
+
+<span class="sd">        Devuelve</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            (valor propio más bajo, vector propio correspondiente).</span>
+
+<span class="sd">        Ejemplo</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; diag = np.array([2.0, 3.0, 4.0])</span>
+<span class="sd">        &gt;&gt;&gt; off = np.array([-1.0, -1.0])</span>
+<span class="sd">        &gt;&gt;&gt; mu, phi0 = Solver.lowest_eigenpair_tridiagonal(diag, off)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">off</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">off</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">V</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Solver.eigenpairs_tridiagonal">
+<a class="viewcode-back" href="../../solver.html#scf.solver.Solver.eigenpairs_tridiagonal">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eigenpairs_tridiagonal</span><span class="p">(</span><span class="n">diag</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">off</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcula los k valores y vectores propios más bajos de una matriz tridiagonal.</span>
+
+<span class="sd">        Parámetros</span>
+<span class="sd">        ----------</span>
+<span class="sd">        diag : np.ndarray</span>
+<span class="sd">            Elementos de la diagonal principal.</span>
+<span class="sd">        off : np.ndarray</span>
+<span class="sd">            Elementos de las diagonales off-diagonal (k=±1).</span>
+<span class="sd">        k : int</span>
+<span class="sd">            Número de eigenpares a devolver.</span>
+
+<span class="sd">        Devuelve</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            (valores propios, vectores propios) de los k estados más bajos.</span>
+
+<span class="sd">        Ejemplo</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; diag = np.array([2.0, 3.0, 4.0])</span>
+<span class="sd">        &gt;&gt;&gt; off = np.array([-1.0, -1.0])</span>
+<span class="sd">        &gt;&gt;&gt; w, V = Solver.eigenpairs_tridiagonal(diag, off, 2)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">off</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">off</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">w</span><span class="p">[:</span><span class="n">k</span><span class="p">],</span> <span class="n">V</span><span class="p">[:,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Solver.normalize_phi">
+<a class="viewcode-back" href="../../solver.html#scf.solver.Solver.normalize_phi">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">normalize_phi</span><span class="p">(</span><span class="n">phi</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Normaliza una función de onda discreta según la integral discreta</span>
+<span class="sd">        sobre la malla (sumatoria multiplicada por dx).</span>
+
+<span class="sd">        Parámetros</span>
+<span class="sd">        ----------</span>
+<span class="sd">        phi : np.ndarray</span>
+<span class="sd">            Vector de la función de onda.</span>
+<span class="sd">        dx : float</span>
+<span class="sd">            Espaciamiento de la malla.</span>
+
+<span class="sd">        Devuelve</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            Función de onda normalizada.</span>
+
+<span class="sd">        Lanza</span>
+<span class="sd">        -----</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            Si la norma calculada no es positiva.</span>
+
+<span class="sd">        Ejemplo</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; phi = np.array([1.0, 2.0, 1.0])</span>
+<span class="sd">        &gt;&gt;&gt; phi_norm = Solver.normalize_phi(phi, dx=0.1)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">norm_phi</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">phi</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">norm_phi</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Norma no positiva.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">phi</span> <span class="o">/</span> <span class="n">norm_phi</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor .</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
