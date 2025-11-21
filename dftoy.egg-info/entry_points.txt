@@ -1,0 +1,3 @@
+[console_scripts]
+dftoy = dftoy.main:main
+dftoy-gui = dftoy.gui:main

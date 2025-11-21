@@ -3,6 +3,7 @@
 
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
+import importlib.resources as resources
 import threading, queue, json, subprocess, os, sys
 import numpy as np
 from pathlib import Path
@@ -441,27 +442,36 @@ class DFTApp(tk.Tk):
     # ================= Ayuda =================
     def open_manual(self):
         """
-        Abre el archivo PDF del manual de usuario ubicado en:
-        <raíz del proyecto>/Manual_Usuario/Manual_usuario.pdf
+        Abre el PDF del manual de usuario empaquetado en:
+        dftoy/Manual_Usuario/Manual_usuario.pdf
+        Funciona tanto en entorno local como paquete instalado.
         """
-        root = Path(__file__).resolve().parents[1]  # raíz del proyecto (carpeta 'python/')
-        candidates = [
-            root / "Manual_Usuario" / "Manual_usuario.pdf",
-            root / "Manual_usuario" / "Manual_usuario.pdf",
-            root / "Manual_Usuario" / "Manual_Usuario.pdf",
-            root / "Manual_usuario" / "Manual_Usuario.pdf",
-        ]
-        for p in candidates:
-            if p.exists():
-                self._open_path(p)
-                if hasattr(self, "timeline"):
-                    self.timeline.log(f"Abriendo manual de usuario: {p}")
-                return
-        messagebox.showerror(
-            "Manual no encontrado",
-            "No se encontró Manual_usuario.pdf en la carpeta Manual_Usuario/Manual_usuario.\n"
-            "Verifique la ruta y el nombre del archivo."
-        )
+        try:
+            # 'dftoy.Manual_Usuario' es la carpeta dentro del paquete
+            pdf_file = resources.files("dftoy") / "Manual_Usuario" / "Manual_usuario.pdf"
+
+            # Convierte a Path para poder abrirlo
+            pdf_path = Path(pdf_file)
+            if not pdf_path.exists():
+                raise FileNotFoundError(f"No se encontró {pdf_path}")
+
+            # Abrir con el visor predeterminado
+            self._open_path(pdf_path)
+            if hasattr(self, "timeline"):
+                self.timeline.log(f"Abriendo manual de usuario: {pdf_path}")
+
+        except FileNotFoundError:
+            messagebox.showerror(
+                "Manual no encontrado",
+                "No se encontró Manual_usuario.pdf. Verifique que el paquete se instaló correctamente."
+            )
+        except Exception as e:
+            messagebox.showerror(
+                "Error al abrir manual",
+                f"No se pudo abrir el manual: {e}"
+            )
+
+
 
     def _open_path(self, path: Path):
         """
@@ -490,7 +500,7 @@ class DFTApp(tk.Tk):
             messagebox.showerror("Error al abrir manual", f"No se pudo abrir el manual:\n{e}")
 
 
-if __name__ == "__main__":
+def main():
     app = DFTApp()
     # Soporte para abrir un .dft con doble clic (python -m gui_app.gui proyecto.dft)
     if len(sys.argv) >= 2:
@@ -504,3 +514,6 @@ if __name__ == "__main__":
         except Exception as e:
             app.timeline.log(f"No se pudo abrir {sys.argv[1]}: {e}")
     app.mainloop()
+
+if __name__ == "__main__":
+    main()
