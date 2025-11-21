@@ -30,6 +30,8 @@ language = 'es'
 html_theme = 'sphinx_rtd_theme'  # Tema moderno similar a ReadTheDocs
 html_static_path = ['_static']
 
+html_use_relative_urls = True
+
 # -- Autodoc options ---------------------------------------------------------
 autodoc_member_order = 'bysource'
 autodoc_typehints = 'description'
