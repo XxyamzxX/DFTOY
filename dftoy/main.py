@@ -6,6 +6,8 @@ from scf.potential import ExternalPotentialParams
 from scf.scf_loop import InitialDensityParams, InitialDensityBuilder, SCFRunner
 from scf.io_utils import IOUtils
 
+J2eV = 1.602176634e-19  # Factor de conversión J → eV
+
 def ask_float(msg):
     return float(input(msg))
 
@@ -77,13 +79,13 @@ def main():
     end_time = time.time()
     total_time = end_time - start_time
 
-    mu = result["mu"]
-    E = result["E"]
-    rho = result["rho"]
+    mu = result["mu"]/J2eV
+    E = result["E"]/J2eV
+    rho = result["rho"]/J2eV
 
     # Salidas en consola
-    print(f"\nEnergía química (mu): {mu} J")
-    print(f"Energía del estado fundamental (E): {E} J")
+    print(f"\nEnergía química (mu): {mu} eV")
+    print(f"Energía del estado fundamental (E): {E} eV")
     print(f"Tiempo total de cálculo: {total_time:.2f} segundos.")
 
     # Archivos y gráficos

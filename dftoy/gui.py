@@ -63,7 +63,7 @@ class DFTApp(tk.Tk):
         return 1.0
 
     def _to_ev(self, y):
-        return np.asarray(y) * self._energy_scale_to_ev()
+        return np.asarray(y) * EV_PER_J
 
     # ================= Menús =================
     def _build_menu(self):
@@ -318,7 +318,7 @@ class DFTApp(tk.Tk):
                     E_ev  = float(self._to_ev(E))  if E  is not None else None
                     self.timeline.log("Simulación finalizada; ya puede ver los resultados en ‘Resultados’.")
                     if mu_ev is not None and E_ev is not None and t is not None:
-                        self.timeline.log(f"μ={mu_ev:.6f} eV, E={E_ev:.6f} eV, t={t:.3f} s")
+                        self.timeline.log(f"μ={mu_ev:.5e} eV, E={E_ev:.5e} eV, t={t:.3f} s")
                     self.running = False
                     self.has_results = True
                     self._set_results_enabled(True)
