@@ -8,7 +8,7 @@ This repository implements a simplified 1D Density Functional Theory (DFT) solve
 
 If you want to run this program in the console you have to write this:
 
-python3 -m gui_app.gui
+python3 -m dftoy.gui
 
 
 If you wanna run pytest you have to write this:

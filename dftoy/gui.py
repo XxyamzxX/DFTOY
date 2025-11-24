@@ -192,8 +192,8 @@ class DFTApp(tk.Tk):
     # ================= Archivo =================
     def ensure_dft_ext(self, path_str: str) -> str:
         p = Path(path_str)
-        if p.suffix.lower() != ".dft":
-            p = p.with_suffix(".dft")
+        if p.suffix.lower() != ".dftoy":
+            p = p.with_suffix(".dftoy")
         return str(p)
 
     def on_new(self):
@@ -213,7 +213,7 @@ class DFTApp(tk.Tk):
     def on_open(self):
         path = filedialog.askopenfilename(
             title="Abrir proyecto",
-            filetypes=[("DFT (*.dft)", "*.dft"), ("Todos", "*.*")]
+            filetypes=[("dftoy (*.dftoy)", "*.dftoy"), ("Todos", "*.*")]
         )
         if not path:
             return
@@ -227,7 +227,7 @@ class DFTApp(tk.Tk):
                 self.has_results = False
                 self._set_results_enabled(False)
             else:
-                messagebox.showerror("Error", "Archivo .dft inválido.")
+                messagebox.showerror("Error", "Archivo .dftoy inválido.")
         except Exception as e:
             messagebox.showerror("Error", f"No se pudo abrir: {e}")
 
@@ -236,9 +236,9 @@ class DFTApp(tk.Tk):
         if not self.current_file:
             path = filedialog.asksaveasfilename(
                 title="Guardar proyecto",
-                defaultextension=".dft",
-                filetypes=[("DFT (*.dft)", "*.dft"), ("Todos", "*.*")],
-                initialfile="proyecto.dft",
+                defaultextension=".dftoy",
+                filetypes=[("dftoy (*.dftoy)", "*.dftoy"), ("Todos", "*.*")],
+                initialfile="proyecto.dftoy",
             )
             if not path:
                 return
