@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="dftoy",
-    version="1.1",
+    version="1.1.2",
     author="Julian Cogua, Juan Esteban Neira",  # varios autores separados por coma
     author_email="ojcoguaa@udistrital.edu.co, jueneirad@udistrital.edu.co",  # separados por coma
     description="Simulación DFT 1D con GUI",

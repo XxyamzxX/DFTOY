@@ -15,7 +15,8 @@ from scf.solver import Solver
 from .bridge import run_scf_once
 from .widgets import LabeledEntry, PotentialCombo, DensityCombo, PlotArea, Timeline
 
-APP_TITLE = "DFT 1D — v1.3"
+APP_TITLE = "DFTOY — v 1.1.2"
+APP_INFO = "DFTOY — v 1.1.2 \n Autores: Julián Cogua - Juan Esteban Neira \n Contacto: ojcoguaa@udistrital.edu.co"
 APP_GEOM  = "1100x700"
 EV_PER_J  = 1.0 / 1.602176634e-19  # J -> eV
 
@@ -104,7 +105,7 @@ class DFTApp(tk.Tk):
         m_help = tk.Menu(menubar, tearoff=0)
         m_help.add_command(label="Manual de usuario", command=self.open_manual)
         m_help.add_separator()
-        m_help.add_command(label="Acerca de…", command=lambda: messagebox.showinfo("Acerca de", APP_TITLE))
+        m_help.add_command(label="Acerca de…", command=lambda: messagebox.showinfo("Acerca de", APP_INFO))
         menubar.add_cascade(label="Ayuda", menu=m_help)
 
         self.config(menu=menubar)
